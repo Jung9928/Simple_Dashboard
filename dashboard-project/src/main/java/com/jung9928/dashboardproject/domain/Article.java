@@ -62,28 +62,6 @@ public class Article extends AuditingFields {
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
-
-    /**
-     * JpaAuditing 어노테이션을 사용함으로써 업데이트 시 마다
-     * 자동으로 게시글 작성자와 작성일시 데이터를 실시간으로 저장하게되고
-     * 최초 insert 시 자동으로 insert 작업 수행.
-     * */
-    @CreatedDate
-    @Column(nullable = false)
-    private LocalDateTime createdAt;    // 생성일시
-
-    @CreatedBy
-    @Column(nullable = false, length = 100)
-    private String createdBy;           // 생성자
-
-    @LastModifiedDate
-    @Column(nullable = false)
-    private LocalDateTime modifiedAt;   // 수정일시
-
-    @LastModifiedBy
-    @Column(nullable = false, length = 100)
-    private String modifiedBy;          // 수정자
-
     // 코드 밖에서 new 객체 생성 방지를 위해 protected로 생성자 작성
     protected Article() {}
 
