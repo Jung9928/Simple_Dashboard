@@ -17,7 +17,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @Getter
-@EqualsAndHashCode     // 게시글을 list에 담아서 게시글 화면에 뿌려준다거나 List 컬렉션으로 비교 로직을 작성할 때 필요
 @ToString
 @Table(indexes = {
         @Index(columnList = "title"),
@@ -26,9 +25,8 @@ import java.util.Set;
         @Index(columnList = "createdBy")
 })
 
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Article {
+public class Article extends AuditingFields {
 
     /**
      * 아래의 메타 데이터들(createdAt, createdBy, modifiedAt, modifiedBy)을 개발자가 임의로 셋팅하지 않도록 하기 위해
@@ -63,28 +61,6 @@ public class Article {
     @OrderBy("id")
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
-
-
-    /**
-     * JpaAuditing 어노테이션을 사용함으로써 업데이트 시 마다
-     * 자동으로 게시글 작성자와 작성일시 데이터를 실시간으로 저장하게되고
-     * 최초 insert 시 자동으로 insert 작업 수행.
-     * */
-    @CreatedDate
-    @Column(nullable = false)
-    private LocalDateTime createdAt;    // 생성일시
-
-    @CreatedBy
-    @Column(nullable = false, length = 100)
-    private String createdBy;           // 생성자
-
-    @LastModifiedDate
-    @Column(nullable = false)
-    private LocalDateTime modifiedAt;   // 수정일시
-
-    @LastModifiedBy
-    @Column(nullable = false, length = 100)
-    private String modifiedBy;          // 수정자
 
     // 코드 밖에서 new 객체 생성 방지를 위해 protected로 생성자 작성
     protected Article() {}
