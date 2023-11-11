@@ -17,7 +17,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @Getter
-@EqualsAndHashCode     // 게시글을 list에 담아서 게시글 화면에 뿌려준다거나 List 컬렉션으로 비교 로직을 작성할 때 필요
 @ToString
 @Table(indexes = {
         @Index(columnList = "title"),
@@ -26,9 +25,8 @@ import java.util.Set;
         @Index(columnList = "createdBy")
 })
 
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Article {
+public class Article extends AuditingFields {
 
     /**
      * 아래의 메타 데이터들(createdAt, createdBy, modifiedAt, modifiedBy)을 개발자가 임의로 셋팅하지 않도록 하기 위해
