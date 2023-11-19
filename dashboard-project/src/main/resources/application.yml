@@ -45,6 +45,9 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
 
+  thymeleaf3:
+    decoupled-logic: true
+
 
 
 #  config:
