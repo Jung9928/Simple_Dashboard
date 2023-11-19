@@ -42,6 +42,9 @@ spring:
       base-path: /api
       detection-strategy: annotated
 
+  thymeleaf:
+    prefix: classpath:/templates/
+
 
 
 #  config:
