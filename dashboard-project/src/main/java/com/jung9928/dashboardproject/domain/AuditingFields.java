@@ -1,6 +1,5 @@
 package com.jung9928.dashboardproject.domain;
 
-import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,11 +13,12 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
-@Getter
 @ToString
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public class AuditingFields {
+// abstract를 사용하여 추상클래스로화 하여 스스로 엔티티가 될 순 없지만 다른 엔티티가 상속을 했을 때, 상속 받은 클래스 내에 추가 필드로 들어가게 됨으로써
+// 자식 클래스의 사용 목적에 좀 더 어울리도록 함.
+public abstract class AuditingFields {
 
     /**
      * JpaAuditing 어노테이션을 사용함으로써 업데이트 시 마다
